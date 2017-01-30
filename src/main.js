@@ -4,8 +4,14 @@ import Vue from 'vue'
 import App from './App'
 
 /* eslint-disable no-new */
-new Vue({
+const vm = new Vue({
   el: '#app',
   template: '<App/>',
-  components: { App }
+  components: {App},
+  created: function () {
+    console.log(111)
+  }
+
 })
+
+console.log(vm)
