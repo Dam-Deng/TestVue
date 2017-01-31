@@ -7,24 +7,27 @@
     <a v-bind:href="url">BAIDU</a>
     <button v-on:click="reverseMessageFun">翻转</button>
     <section>
-      <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo" placeholder="Add Todo Item"/>
+      <input type="text" v-model.trim="newTodo" v-on:keyup.enter="addTodo" placeholder="Add Todo Item"/>
       <ul>
-        <List v-for="(todo, index) in todos" v-bind:todo="todo" v-on:remove="removeTodo(index)"></List>
+        <list v-for="(todo, index) in todos" v-bind:todo="todo" v-on:remove="removeTodo(index)"></list>
       </ul>
     </section>
-    <hello></hello>
+    <hello>
+      <h3>Simple Slot</h3>
+      <p slot="p-slot">P Slot</p>
+    </hello>
   </div>
 </template>
 
 <script>
-  import Hello from './components/Hello'
-  import List from './components/List'
+  import hello from './components/Hello'
+  import list from './components/List'
 
   export default {
     name: 'app',
     components: {
-      Hello,
-      List
+      hello,
+      list
     },
     data () {
       return {
@@ -34,9 +37,9 @@
         message: 'TIME: ' + (new Date()),
         newTodo: '',
         todos: [
-          'todo1',
-          'todo2',
-          'todo3'
+          {text: 'todo1'},
+          {text: 'todo2'},
+          {text: 'todo3'}
         ],
         url: '//www.baidu.com'
       }
@@ -50,7 +53,7 @@
       addTodo: function () {
         let todo = this.newTodo.trim()
         if (todo.length > 0) {
-          this.todos.push(todo)
+          this.todos.push({text: todo})
           this.newTodo = ''
         }
       },

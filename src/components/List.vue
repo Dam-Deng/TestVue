@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{ todo }}
+    {{ todo.text }}
     <button v-on:click="$emit('remove')">X</button>
   </li>
 </template>
