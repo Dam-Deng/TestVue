@@ -8,9 +8,10 @@
     <button v-on:click="reverseMessageFun">翻转</button>
     <section>
       <input type="text" v-model.trim="newTodo" v-on:keyup.enter="addTodo" placeholder="Add Todo Item"/>
-      <ul>
-        <list v-for="(todo, index) in todos" v-bind:todo="todo" v-on:remove="removeTodo(index)"></list>
-      </ul>
+      <button @click="shuffleTodo">打乱</button>
+      <transition-group name="fade" tag="ul">
+        <list v-for="(todo, index) in todos" :key="todo.text" v-bind:todo="todo" v-on:remove="removeTodo(index)"></list>
+      </transition-group>
     </section>
     <hello>
       <h3>Simple Slot</h3>
@@ -22,6 +23,7 @@
 <script>
   import hello from './components/Hello'
   import list from './components/List'
+  var _ = require('lodash')
 
   export default {
     name: 'app',
@@ -62,6 +64,9 @@
       },
       removeTodo: function (index) {
         this.todos.splice(index, 1)
+      },
+      shuffleTodo: function () {
+        this.todos = _.shuffle(this.todos)
       }
     },
     filters: {
