@@ -4,32 +4,28 @@
     <h1 v-show="seen" class="red" v-bind:class="{ active : isActive }">{{ message|uppercase }}</h1>
     <h1 v-if="seen">{{ reversedMessage }}</h1>
     <h1 v-else>{{ message }}</h1>
-    <a v-bind:href="url">BAIDU</a>
+    <a :href="url.homeUrl">HOME</a>
+    <a :href="url.todoListUrl">TodoList</a>
     <button v-on:click="reverseMessageFun">翻转</button>
-    <section>
-      <input type="text" v-model.trim="newTodo" v-on:keyup.enter="addTodo" placeholder="Add Todo Item"/>
-      <button @click="shuffleTodo">打乱</button>
-      <transition-group name="fade" tag="ul">
-        <list v-for="(todo, index) in todos" :key="todo.text" v-bind:todo="todo" v-on:remove="removeTodo(index)"></list>
-      </transition-group>
-    </section>
-    <hello>
-      <h3>Simple Slot</h3>
-      <p slot="p-slot">P Slot</p>
-    </hello>
+    <component v-bind:is="ViewComponent"></component>
   </div>
 </template>
 
 <script>
-  import hello from './components/Hello'
-  import list from './components/List'
-  var _ = require('lodash')
+  import Hello from './components/Hello'
+  import TodoList from './components/TodoList'
+
+  const NotFound = {template: '<p>Page not found</p>'}
+  const routes = {
+    '/': Hello,
+    '/todo-list': TodoList
+  }
 
   export default {
     name: 'app',
     components: {
-      hello,
-      list
+      Hello,
+      TodoList
     },
     data () {
       return {
@@ -37,36 +33,24 @@
         isActive: true,
         hasError: true,
         message: 'TIME: ' + (new Date()),
-        newTodo: '',
-        todos: [
-          {text: 'todo1'},
-          {text: 'todo2'},
-          {text: 'todo3'}
-        ],
-        url: '//www.baidu.com'
+        currentRoute: window.location.pathname,
+        url: {
+          homeUrl: '/',
+          todoListUrl: '/todo-list'
+        }
       }
     },
     computed: {
       reversedMessage: function () {
         return this.message.split('').reverse().join('')
+      },
+      ViewComponent () {
+        return routes[this.currentRoute] || NotFound
       }
     },
     methods: {
-      addTodo: function () {
-        let todo = this.newTodo.trim()
-        if (todo.length > 0) {
-          this.todos.push({text: todo})
-          this.newTodo = ''
-        }
-      },
       reverseMessageFun: function () {
         this.message = this.message.split('').reverse().join('')
-      },
-      removeTodo: function (index) {
-        this.todos.splice(index, 1)
-      },
-      shuffleTodo: function () {
-        this.todos = _.shuffle(this.todos)
       }
     },
     filters: {
@@ -97,18 +81,4 @@
     text-shadow: 2px 2px 8px;
   }
 
-  ul {
-    display: inline-block;
-    width: 100%;
-    max-width: 500px;
-  }
-
-  li {
-    text-align: left;
-  }
-
-  input {
-    width: 80%;
-    max-width: 768px;
-  }
 </style>
