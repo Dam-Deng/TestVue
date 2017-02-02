@@ -8,10 +8,12 @@
     <router-link :to="url.todoListUrl">TodoList</router-link>
     <button v-on:click="reverseMessageFun">翻转</button>
 
-    <router-view>
-      <h3>Simple Slot</h3>
-      <p slot="p-slot">P Slot</p>
-    </router-view>
+    <transition name="fade">
+      <router-view>
+        <h3>Simple Slot</h3>
+        <p slot="p-slot">P Slot</p>
+      </router-view>
+    </transition>
   </div>
 </template>
 
@@ -51,7 +53,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -69,4 +71,19 @@
     text-shadow: 2px 2px 8px;
   }
 
+
+  .fade-enter-active {
+    transition: opacity .5s
+  }
+
+  .fade-leave-active {
+    transition: opacity .2s
+  }
+
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
+  .fade-move {
+    transition: transform 1s;
+  }
 </style>

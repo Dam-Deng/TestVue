@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "rsync-prod": "rsync -azP -e 'ssh -p 3834' ./dist root@23.89.13.31:/home/webuser/www/TestVue"
+    "rsync-prod": "rsync -azvhP -e 'ssh -p 3834' ./dist root@23.89.13.31:/home/webuser/www/TestVue"
   },
   "dependencies": {
     "lodash": "^4.17.4",

@@ -11,6 +11,7 @@ Vue.use(VueRouter)
 const NotFound = {template: '<p>Page not found</p>'}
 
 const router = new VueRouter({
+  mode: 'history',
   routes: [
     {path: '/', component: Hello},
     {path: '/todo-list', component: TodoList},
