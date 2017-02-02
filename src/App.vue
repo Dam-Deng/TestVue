@@ -4,29 +4,20 @@
     <h1 v-show="seen" class="red" v-bind:class="{ active : isActive }">{{ message|uppercase }}</h1>
     <h1 v-if="seen">{{ reversedMessage }}</h1>
     <h1 v-else>{{ message }}</h1>
-    <a :href="url.homeUrl">HOME</a>
-    <a :href="url.todoListUrl">TodoList</a>
+    <router-link :to="url.homeUrl">HOME</router-link>
+    <router-link :to="url.todoListUrl">TodoList</router-link>
     <button v-on:click="reverseMessageFun">翻转</button>
-    <component v-bind:is="ViewComponent"></component>
+
+    <router-view>
+      <h3>Simple Slot</h3>
+      <p slot="p-slot">P Slot</p>
+    </router-view>
   </div>
 </template>
 
 <script>
-  import Hello from './components/Hello'
-  import TodoList from './components/TodoList'
-
-  const NotFound = {template: '<p>Page not found</p>'}
-  const routes = {
-    '/': Hello,
-    '/todo-list': TodoList
-  }
-
   export default {
     name: 'app',
-    components: {
-      Hello,
-      TodoList
-    },
     data () {
       return {
         seen: true,
@@ -43,9 +34,6 @@
     computed: {
       reversedMessage: function () {
         return this.message.split('').reverse().join('')
-      },
-      ViewComponent () {
-        return routes[this.currentRoute] || NotFound
       }
     },
     methods: {
