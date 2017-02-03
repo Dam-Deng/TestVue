@@ -3,11 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './Router'
+import store from './store/index'
 
 /* eslint-disable no-new */
 const vm = new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: {App},
   created: function () {

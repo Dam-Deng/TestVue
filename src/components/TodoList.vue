@@ -1,7 +1,7 @@
 <template>
   <section>
     <input type="text" v-model.trim="newTodo" v-on:keyup.enter="addTodo" placeholder="Add Todo Item"/>
-    <button @click="shuffleTodo">打乱</button>
+    <button @click="shuffleTodoAsync">打乱</button>
     <transition-group name="fade" tag="ul">
       <ListItem v-for="(todo, index) in todos"
                 :key="todo.text"
@@ -13,8 +13,8 @@
 
 <script>
   import ListItem from './ListItem'
-
-  var _ = require('lodash')
+  import {mapMutations, mapActions} from 'vuex'
+  import store from '../store/index.js'
 
   export default {
     name: 'TodoList',
@@ -23,28 +23,25 @@
     },
     data () {
       return {
-        newTodo: '',
-        todos: [
-          {text: 'todo1'},
-          {text: 'todo2'},
-          {text: 'todo3'}
-        ]
+        newTodo: ''
+      }
+    },
+    computed: {
+      todos () {
+        return store.state.todos
       }
     },
     methods: {
-      addTodo: function () {
-        let todo = this.newTodo.trim()
-        if (todo.length > 0) {
-          this.todos.push({text: todo})
-          this.todos = _.uniqBy(this.todos, 'text')
-          this.newTodo = ''
-        }
-      },
-      removeTodo: function (index) {
-        this.todos.splice(index, 1)
-      },
-      shuffleTodo: function () {
-        this.todos = _.shuffle(this.todos)
+      ...mapMutations([
+        'removeTodo',
+        'shuffleTodo'
+      ]),
+      ...mapActions([
+        'shuffleTodoAsync'
+      ]),
+      addTodo () {
+        store.commit('addTodo', this.newTodo)
+        this.newTodo = ''
       }
     }
   }
