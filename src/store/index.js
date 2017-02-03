@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 var _ = require('lodash')
 const store = new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
   state: {
     todos: [
       {text: 'todo1'},
