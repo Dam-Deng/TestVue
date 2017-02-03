@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import Hello from './components/Hello'
-import TodoList from './components/TodoList'
+// import TodoList from './components/TodoList'
 import VueRouter from 'vue-router'
+
+const TodoList = resolve => require(['./components/TodoList.vue'], resolve)
 
 Vue.use(VueRouter)
 

@@ -9,10 +9,12 @@
     <button v-on:click="reverseMessageFun">翻转</button>
 
     <transition name="fade">
-      <router-view>
-        <h3>Simple Slot</h3>
-        <p slot="p-slot">P Slot</p>
-      </router-view>
+      <keep-alive>
+        <router-view>
+          <h3>Simple Slot</h3>
+          <p slot="p-slot">P Slot</p>
+        </router-view>
+      </keep-alive>
     </transition>
   </div>
 </template>
@@ -71,7 +73,6 @@
     text-shadow: 2px 2px 8px;
   }
 
-
   .fade-enter-active {
     transition: opacity .5s
   }
@@ -83,6 +84,7 @@
   .fade-enter, .fade-leave-active {
     opacity: 0
   }
+
   .fade-move {
     transition: transform 1s;
   }
