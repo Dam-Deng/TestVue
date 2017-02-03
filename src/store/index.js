@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import types from './mutation-type'
 
 Vue.use(Vuex)
 
@@ -13,24 +14,24 @@ const store = new Vuex.Store({
     ]
   },
   mutations: {
-    addTodo (state, todo) {
+    [types.ADD_TODO] (state, todo) {
       if (todo.length > 0) {
         let todos = state.todos
         todos.push({text: todo})
         state.todos = _.uniqBy(todos, 'text')
       }
     },
-    removeTodo (state, index) {
+    [types.REMOVE_TODO] (state, index) {
       state.todos.splice(index, 1)
     },
-    shuffleTodo (state) {
+    [types.SHUFFLE_TODO] (state) {
       state.todos = _.shuffle(state.todos)
     }
   },
   actions: {
     shuffleTodoAsync (context) {
       setTimeout(() => {
-        context.commit('shuffleTodo')
+        context.commit(types.SHUFFLE_TODO)
         console.log('sleep 2s')
       }, 2000)
     }

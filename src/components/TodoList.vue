@@ -15,6 +15,7 @@
   import ListItem from './ListItem'
   import {mapMutations, mapActions} from 'vuex'
   import store from '../store/index.js'
+  import types from '../store/mutation-type.js'
 
   export default {
     name: 'TodoList',
@@ -32,15 +33,15 @@
       }
     },
     methods: {
-      ...mapMutations([
-        'removeTodo',
-        'shuffleTodo'
-      ]),
+      ...mapMutations({
+        'removeTodo': types.REMOVE_TODO,
+        'shuffleTodo': types.SHUFFLE_TODO
+      }),
       ...mapActions([
         'shuffleTodoAsync'
       ]),
       addTodo () {
-        store.commit('addTodo', this.newTodo)
+        store.commit(types.ADD_TODO, this.newTodo)
         this.newTodo = ''
       }
     }
