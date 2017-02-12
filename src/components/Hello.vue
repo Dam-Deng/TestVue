@@ -5,22 +5,21 @@
     <slot>
       <h3>Empty Slot</h3>
     </slot>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
     <slot name="p-slot"></slot>
+    <div class="box">
+      <div class="item red">
+        1111
+      </div>
+      <div class="item blue">
+        222
+      </div>
+      <div class="item black">
+        333
+      </div>
+      <div class="item red">
+        444
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,7 +35,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped style="sass">
 h1, h2 {
   font-weight: normal;
 }
@@ -54,4 +53,45 @@ li {
 a {
   color: #42b983;
 }
+
+.red{
+  background: red;
+  height: 100px;
+  /*order: 1;*/
+  /*flex-grow: 3;*/
+
+}
+.blue{
+  background: blue;
+  height: 50px;
+  /*order: 2;*/
+  /*flex-grow: 2;*/
+}
+.black{
+  background: black;
+  height: 200px;
+  /*order: 3;*/
+  /*flex-grow: 1;*/
+  /*flex-basis: 50px;*/
+}
+
+.item{
+  flex: 0 0 50%;
+}
+
+
+  .box{
+    height: 200px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /*flex-direction: row;*/
+    /*flex-wrap: nowrap;*/
+    /*flex-flow: row-reverse nowrap;*/
+    /*justify-content: space-around;*/
+    /*align-items: stretch;*/
+    /*align-content: center;*/
+  }
 </style>

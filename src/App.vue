@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <h1 v-show="seen" class="red" v-bind:class="{ active : isActive }">{{ message|uppercase }}</h1>
+    <h1 v-show="seen" class="pink" v-bind:class="{ active : isActive }">{{ message|uppercase }}</h1>
     <h1 v-if="seen">{{ reversedMessage }}</h1>
     <h1 v-else>{{ message }}</h1>
     <router-link :to="url.homeUrl">HOME</router-link>
@@ -65,7 +65,7 @@
     margin-top: 60px;
   }
 
-  .red {
+  .pink {
     color: #ff568f;
   }
 
