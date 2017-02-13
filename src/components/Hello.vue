@@ -24,63 +24,64 @@
 </template>
 
 <script>
-export default {
-  name: 'hello',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  export default {
+    name: 'hello',
+    data () {
+      return {
+        msg: 'Welcome to Your Vue.js App'
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped style="sass">
-h1, h2 {
-  font-weight: normal;
-}
+  h1, h2 {
+    font-weight: normal;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
 
-a {
-  color: #42b983;
-}
+  a {
+    color: #42b983;
+  }
 
-.red{
-  background: red;
-  height: 100px;
-  /*order: 1;*/
-  /*flex-grow: 3;*/
+  .red {
+    background: red;
+    height: 100px;
+    /*order: 1;*/
+    /*flex-grow: 3;*/
 
-}
-.blue{
-  background: blue;
-  height: 50px;
-  /*order: 2;*/
-  /*flex-grow: 2;*/
-}
-.black{
-  background: black;
-  height: 200px;
-  /*order: 3;*/
-  /*flex-grow: 1;*/
-  /*flex-basis: 50px;*/
-}
+  }
 
-.item{
-  flex: 0 0 50%;
-}
+  .blue {
+    background: blue;
+    height: 50px;
+    /*order: 2;*/
+    /*flex-grow: 2;*/
+  }
 
+  .black {
+    background: black;
+    height: 200px;
+    /*order: 3;*/
+    /*flex-grow: 1;*/
+    /*flex-basis: 50px;*/
+  }
 
-  .box{
+  .item {
+    flex: 0 0 50%;
+  }
+
+  .box {
     height: 200px;
     color: #fff;
     display: flex;

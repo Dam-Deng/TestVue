@@ -27,6 +27,9 @@
         newTodo: ''
       }
     },
+    created: function () {
+      store.dispatch('cycleCountDown')
+    },
     computed: {
       todos () {
         return store.state.todos

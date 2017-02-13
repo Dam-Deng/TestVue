@@ -12,7 +12,9 @@ const store = new Vuex.Store({
       {text: 'todo1'},
       {text: 'todo2'},
       {text: 'todo3'}
-    ]
+    ],
+    count: 10,
+    time: ''
   },
   mutations: {
     [types.ADD_TODO] (state, todo) {
@@ -27,6 +29,14 @@ const store = new Vuex.Store({
     },
     [types.SHUFFLE_TODO] (state) {
       state.todos = _.shuffle(state.todos)
+    },
+    countDown (state, IntervalId) {
+      state.count -= 1
+      console.log(state.count)
+      if (state.count <= 0) {
+        clearInterval(IntervalId)
+        console.log('STOP INTERVAL!')
+      }
     }
   },
   actions: {
@@ -34,7 +44,12 @@ const store = new Vuex.Store({
       setTimeout(() => {
         context.commit(types.SHUFFLE_TODO)
         console.log('sleep 2s')
-      }, 2000)
+      }, 500)
+    },
+    cycleCountDown (context) {
+      let IntervalId = setInterval(() => {
+        context.commit('countDown', IntervalId)
+      }, 1000)
     }
   }
 })
